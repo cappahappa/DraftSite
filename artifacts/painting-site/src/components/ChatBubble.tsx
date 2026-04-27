@@ -45,25 +45,33 @@ export const ChatBubble = () => {
     if (!trimmed || loading) return;
 
     const userMsg: ChatMessage = { role: "user", text: trimmed };
-    const nextMessages = [...messages, userMsg];
+    const history = messages.filter((m) => m !== INITIAL_GREETING);
 
-    setMessages(nextMessages);
+    setMessages([...messages, userMsg]);
     setInput("");
     setLoading(true);
 
-    // Static-site friendly reply: brief delay so it feels like a real response,
-    // then send the user a canned message inviting them to call/text.
-    await new Promise((r) => setTimeout(r, 700));
+    let reply =
+      "Thanks for reaching out! For the fastest response, call or text us at (772) 539-2115, " +
+      "or fill out the quote form on this page and we'll get right back to you.";
 
-    setMessages((prev) => [
-      ...prev,
-      {
-        role: "model",
-        text:
-          "Thanks for reaching out! For the fastest response, call or text us at (772) 539-2115, " +
-          "or fill out the quote form on this page and we'll get right back to you.",
-      },
-    ]);
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: trimmed, history }),
+      });
+      const data = (await res.json()) as { reply?: string; error?: string };
+      if (res.ok && data.reply) {
+        reply = data.reply;
+      } else if (data.error) {
+        reply = data.error;
+      }
+    } catch {
+      // network failure — keep fallback reply
+    }
+
+    setMessages((prev) => [...prev, { role: "model", text: reply }]);
     setLoading(false);
   };
 

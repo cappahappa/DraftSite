@@ -2,12 +2,18 @@ import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRight, Home } from "lucide-react";
 
-import painterBg from "@assets/stock_images/hero_painter_bg.webp";
-import blogBg from "@assets/stock_images/hero_blog_bg.webp";
-import contactBg from "@assets/stock_images/hero_contact_bg.webp";
-import galleryBg from "@assets/stock_images/hero_gallery_bg.webp";
-import areaBg from "@assets/stock_images/hero_area_bg.webp";
-import reviewsBg from "@assets/stock_images/hero_reviews_bg.webp";
+const painterBg =
+  "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=2000&q=70";
+const blogBg =
+  "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=2000&q=70";
+const contactBg =
+  "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=2000&q=70";
+const galleryBg =
+  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=70";
+const areaBg =
+  "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=2000&q=70";
+const reviewsBg =
+  "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=2000&q=70";
 
 const bgMap: Record<string, string> = {
   service: painterBg,
