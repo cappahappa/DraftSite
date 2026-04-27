@@ -26,7 +26,7 @@ export const Hero = () => {
       <div className="container-tight grid gap-10 py-16 lg:grid-cols-[1.1fr_1fr] lg:gap-14 lg:py-24">
         <div className="flex flex-col justify-center text-white animate-fade-in-up">
           <span className="text-overline mb-4 text-yellow-400">{site.tagline}</span>
-          <h1 className="heading-display text-4xl text-white sm:text-5xl lg:text-6xl xl:text-7xl">
+          <h1 className="heading-display text-3xl text-white sm:text-4xl lg:text-5xl xl:text-6xl">
             <span className="block">PROFESSIONAL PAINTING SERVICES</span>
             <span className="block text-primary">IN VERO BEACH, FL.</span>
           </h1>
