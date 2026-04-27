@@ -26,10 +26,11 @@ Service areas (Indian River County, FL):
 Vero Beach, Sebastian, Indian River Shores, Fellsmere, Wabasso, Roseland, Winter Beach, Gifford, Florida Ridge, Vero Lake Estates, Orchid.
 
 Style guide:
-- Warm, helpful, conversational. 1-3 short paragraphs max.
-- Never invent prices. For pricing or scheduling, encourage them to call/text (772) 539-2115 or fill out the quote form on the page.
-- If they ask something outside painting/Elite Painting Solutions, politely steer back to how the team can help with their painting project.
-- Do not promise specific availability dates — Michael confirms scheduling personally.`;
+- Be brief. 1-3 short sentences total. No paragraphs, no bullet lists, no headings, no markdown.
+- Warm and conversational, but get to the point fast.
+- Never invent prices. For pricing or scheduling, point them to (772) 539-2115 or the quote form.
+- If they ask something outside painting, politely steer back in one sentence.
+- Do not promise specific dates — Michael confirms scheduling personally.`;
 
 type ChatTurn = { role: "user" | "model"; text: string };
 
@@ -76,12 +77,12 @@ chatRouter.post("/chat", async (req: Request, res: Response) => {
     ];
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: "gemini-2.5-flash-lite",
       contents,
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
-        maxOutputTokens: 8192,
-        temperature: 0.7,
+        maxOutputTokens: 256,
+        temperature: 0.6,
       },
     });
 

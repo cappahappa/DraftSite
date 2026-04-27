@@ -27,8 +27,8 @@ export const Hero = () => {
         <div className="flex flex-col justify-center text-white animate-fade-in-up">
           <span className="text-overline mb-4 text-yellow-400">{site.tagline}</span>
           <h1 className="heading-display text-3xl text-white sm:text-4xl lg:text-5xl xl:text-6xl">
-            <span className="block">PROFESSIONAL PAINTING SERVICES</span>
-            <span className="block text-primary">IN VERO BEACH, FL.</span>
+            <span className="block">PROFESSIONAL PAINTING SERVICES IN</span>
+            <span className="block text-primary">VERO BEACH, FL.</span>
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">
             {site.description}
