@@ -1,0 +1,181 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(220 30% 12%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(220 30% 12%);
+  --color-popover: hsl(0 0% 100%);
+  --color-popover-foreground: hsl(220 30% 12%);
+  --color-primary: hsl(358 78% 48%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(220 60% 22%);
+  --color-secondary-foreground: hsl(0 0% 100%);
+  --color-muted: hsl(220 20% 96%);
+  --color-muted-foreground: hsl(220 15% 32%);
+  --color-accent: hsl(0 0% 10%);
+  --color-accent-foreground: hsl(0 0% 100%);
+  --color-destructive: hsl(0 84% 60%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+  --color-border: hsl(220 15% 88%);
+  --color-input: hsl(220 15% 88%);
+  --color-ring: hsl(358 78% 48%);
+
+  --radius-sm: 0.25rem;
+  --radius: 0.5rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+
+  --font-sans: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --primary-hsl: 358 78% 48%;
+  --primary-glow: hsl(48 100% 55%);
+  --surface-warm: hsl(48 60% 97%);
+  --surface-dark: hsl(0 0% 8%);
+
+  --shadow-soft: 0 4px 20px -4px hsl(220 30% 12% / 0.12);
+  --shadow-elegant: 0 20px 50px -20px hsl(220 30% 12% / 0.3);
+  --shadow-glow: 0 10px 40px -10px hsl(358 78% 48% / 0.5);
+  --shadow-yellow: 0 10px 40px -10px hsl(48 100% 55% / 0.6);
+  --shadow-card: 0 2px 12px -2px hsl(220 30% 12% / 0.1);
+
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  *, *::before, *::after {
+    border-color: hsl(220 15% 88%);
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: hsl(0 0% 100%);
+    color: hsl(220 30% 12%);
+    font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .heading-display {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .text-overline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: hsl(358 78% 48%);
+    text-transform: uppercase;
+  }
+
+  .font-display {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .container-tight {
+    margin-inline: auto;
+    max-width: 80rem;
+    padding-inline: 1rem;
+  }
+
+  .shadow-card { box-shadow: var(--shadow-card); }
+  .shadow-elegant { box-shadow: var(--shadow-elegant); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .shadow-yellow { box-shadow: var(--shadow-yellow); }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+
+  .transition-smooth { transition: var(--transition-smooth); }
+  .transition-spring { transition: var(--transition-spring); }
+
+  .bg-surface-warm { background-color: var(--surface-warm); }
+
+  .text-primary-glow { color: var(--primary-glow); }
+
+  .footer-col-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    color: #ffffff;
+  }
+}
+
+@layer utilities {
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease both;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.5s ease both;
+  }
+
+  @keyframes slide-down {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-slide-down {
+    animation: slide-down 0.2s ease both;
+  }
+
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .animate-scale-in {
+    animation: scale-in 0.3s ease both;
+  }
+}
+
+/* Trust-bar logo marquee — plain top-level CSS so Tailwind never tree-shakes it */
+@keyframes eps-marquee {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-33.3333%, 0, 0); }
+}
+.eps-marquee-track {
+  display: flex !important;
+  align-items: center;
+  width: max-content !important;
+  animation: eps-marquee 25s linear infinite !important;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+.eps-marquee-viewport:hover .eps-marquee-track,
+.eps-marquee-viewport:focus-within .eps-marquee-track {
+  animation-play-state: paused !important;
+}
+
+/* Reviews slider — same loop pattern, slower for readability */
+.eps-reviews-track {
+  width: max-content !important;
+  animation: eps-marquee 60s linear infinite !important;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+.eps-marquee-viewport:hover .eps-reviews-track,
+.eps-marquee-viewport:focus-within .eps-reviews-track {
+  animation-play-state: paused !important;
+}

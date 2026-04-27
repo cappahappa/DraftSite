@@ -1,0 +1,35 @@
+# Long-cache hashed Vite assets (immutable filenames). 1 year.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+  X-Content-Type-Options: nosniff
+
+# Static images (gallery + favicons + OG image). 30 days.
+/gallery/*
+  Cache-Control: public, max-age=2592000
+/*.webp
+  Cache-Control: public, max-age=2592000
+/*.jpg
+  Cache-Control: public, max-age=2592000
+/*.jpeg
+  Cache-Control: public, max-age=2592000
+/*.png
+  Cache-Control: public, max-age=2592000
+/*.svg
+  Cache-Control: public, max-age=2592000
+
+# Fonts (if self-hosted in the future). 1 year.
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML pages — short cache, must revalidate so updates ship fast.
+/*.html
+  Cache-Control: public, max-age=600, must-revalidate
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+# Default for everything else
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
