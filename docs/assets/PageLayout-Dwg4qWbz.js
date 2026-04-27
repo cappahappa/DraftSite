@@ -1,0 +1,1 @@
+import{j as r}from"./react-CBI3Plg_.js";import{H as e,F as t}from"./SEO-CZyiD_2M.js";import{ChatBubble as o}from"./ChatBubble-BH2Ogjpw.js";const x=({children:s,transparentHeader:a=!0})=>r.jsxs("div",{className:"min-h-screen bg-background",children:[r.jsx(e,{transparent:a}),r.jsx("main",{children:s}),r.jsx(t,{}),r.jsx(o,{})]});export{x as P};
