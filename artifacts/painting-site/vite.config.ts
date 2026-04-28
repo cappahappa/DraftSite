@@ -17,8 +17,19 @@ const outDir = isGhPages
   ? path.resolve(import.meta.dirname, "..", "..", "docs")
   : path.resolve(import.meta.dirname, "dist/public");
 
+// Expose the Gemini key to the client bundle. Vite normally only forwards
+// VITE_*-prefixed env vars; this lets the existing GEMINI_API_KEY secret flow
+// through without requiring the user to rename it. The site is a 100% static
+// build (GitHub Pages), so the chatbot has to call Gemini directly from the
+// browser — there is no server in production to proxy through.
+const geminiKey =
+  process.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY || "";
+
 export default defineConfig({
   base: basePath,
+  define: {
+    "import.meta.env.VITE_GEMINI_API_KEY": JSON.stringify(geminiKey),
+  },
   plugins: [
     react(),
     tailwindcss(),

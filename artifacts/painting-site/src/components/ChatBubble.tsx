@@ -12,6 +12,94 @@ const INITIAL_GREETING: ChatMessage = {
   text: "Hi! I'm the Elite Painting Solutions assistant. Ask me about our services, scheduling, or request a free quote — I'm happy to help!",
 };
 
+const FALLBACK_REPLY =
+  "Thanks for reaching out! Looks like the chatbot is having an issue at the moment. " +
+  "You can reach us directly: call or text (772) 539-2115, email eps.paintingsolutions@gmail.com, " +
+  "or fill out the contact form on this page and we'll get right back to you.";
+
+const SYSTEM_INSTRUCTION = `You are the friendly assistant for Elite Painting Solutions, a 5-star, locally owned painting company serving Vero Beach, Sebastian, and all of Indian River County, Florida. The owner is Michael.
+
+About the company:
+- Phone: (772) 539-2115
+- Email: eps.paintingsolutions@gmail.com
+- 30+ years of experience, fully licensed and insured, family-owned
+- Free in-home estimates with no pressure
+- Workmanship warranty plus the manufacturer's paint warranty
+- Premium paints (Sherwin-Williams, Benjamin Moore, low-VOC and zero-VOC options)
+
+Services offered:
+- Interior painting (walls, ceilings, trim, doors, accent walls)
+- Exterior painting (siding, trim, fences, decks; pressure wash + 2 coats)
+- Cabinet refinishing (factory-grade spray finish, typically 4-6 days)
+- Commercial painting (offices, retail, multi-unit; nights/weekends available)
+- Pressure washing (homes, decks, driveways, fences; soft-wash for delicate surfaces)
+- Ceiling services (popcorn ceiling removal, repair, smooth refinishing)
+
+Service areas (Indian River County, FL):
+Vero Beach, Sebastian, Indian River Shores, Fellsmere, Wabasso, Roseland, Winter Beach, Gifford, Florida Ridge, Vero Lake Estates, Orchid.
+
+Style guide:
+- Be brief. 1-3 short sentences total. No paragraphs, no bullet lists, no headings, no markdown.
+- Warm and conversational, but get to the point fast.
+- Never invent prices. For pricing or scheduling, point them to (772) 539-2115 or the quote form.
+- If they ask something outside painting, politely steer back in one sentence.
+- Do not promise specific dates — Michael confirms scheduling personally.`;
+
+const GEMINI_API_KEY =
+  (import.meta.env.VITE_GEMINI_API_KEY as string | undefined) ?? "";
+
+const callGemini = async (
+  history: ChatMessage[],
+  message: string,
+): Promise<string | null> => {
+  if (!GEMINI_API_KEY) return null;
+  try {
+    const url =
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=" +
+      encodeURIComponent(GEMINI_API_KEY);
+
+    const contents = [
+      ...history.slice(-10).map((t) => ({
+        role: t.role,
+        parts: [{ text: t.text }],
+      })),
+      { role: "user" as const, parts: [{ text: message }] },
+    ];
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 12000);
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents,
+        systemInstruction: {
+          role: "system",
+          parts: [{ text: SYSTEM_INSTRUCTION }],
+        },
+        generationConfig: { temperature: 0.6, maxOutputTokens: 256 },
+      }),
+      signal: controller.signal,
+    }).finally(() => clearTimeout(timeout));
+
+    if (!res.ok) return null;
+
+    const data = (await res.json()) as {
+      candidates?: Array<{
+        content?: { parts?: Array<{ text?: string }> };
+      }>;
+    };
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (typeof text === "string" && text.trim().length > 0) {
+      return text.trim();
+    }
+    return null;
+  } catch {
+    return null;
+  }
+};
+
 export const ChatBubble = () => {
   const [open, setOpen] = useState(false);
   const [showTeaser, setShowTeaser] = useState(true);
@@ -45,17 +133,13 @@ export const ChatBubble = () => {
     if (!trimmed || loading) return;
 
     const userMsg: ChatMessage = { role: "user", text: trimmed };
+    const priorHistory = messages;
 
-    setMessages([...messages, userMsg]);
+    setMessages([...priorHistory, userMsg]);
     setInput("");
     setLoading(true);
 
-    const reply =
-      "Thanks for reaching out! For the fastest response, call or text us at (772) 539-2115, " +
-      "or fill out the quote form on this page and we'll get right back to you.";
-
-    // Small delay so the typing indicator feels natural
-    await new Promise((resolve) => setTimeout(resolve, 600));
+    const reply = (await callGemini(priorHistory, trimmed)) ?? FALLBACK_REPLY;
 
     setMessages((prev) => [...prev, { role: "model", text: reply }]);
     setLoading(false);

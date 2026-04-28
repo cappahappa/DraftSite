@@ -178,15 +178,19 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* Always keep marquees running — never pause on hover, focus, or reduced motion */
-.eps-marquee-track,
-.eps-reviews-track {
-  animation-play-state: running !important;
+/* Pause marquees while the cursor (or keyboard focus) is over them, so
+   visitors can comfortably click review cards and social-network links.
+   Animation resumes the moment the cursor leaves the strip. */
+.eps-marquee-viewport:hover .eps-marquee-track,
+.eps-marquee-viewport:focus-within .eps-marquee-track,
+.eps-marquee-viewport:hover .eps-reviews-track,
+.eps-marquee-viewport:focus-within .eps-reviews-track {
+  animation-play-state: paused !important;
 }
 @media (prefers-reduced-motion: reduce) {
   .eps-marquee-track,
   .eps-reviews-track {
-    animation-play-state: running !important;
+    animation-play-state: paused !important;
   }
 }
 
