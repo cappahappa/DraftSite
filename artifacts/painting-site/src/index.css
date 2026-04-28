@@ -190,7 +190,7 @@
 @media (prefers-reduced-motion: reduce) {
   .eps-marquee-track,
   .eps-reviews-track {
-    animation-play-state: paused !important;
+    animation-play-state: running !important;
   }
 }
 
