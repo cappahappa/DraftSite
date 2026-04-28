@@ -1,10 +1,10 @@
 import { useParams, Link, Navigate } from "react-router-dom";
-import { MapPin, Phone, ArrowRight, Check } from "lucide-react";
+import { MapPin, Phone, ArrowRight, Check, Sun } from "lucide-react";
 import { PageLayout } from "@/components/PageLayout";
 import { PageHero } from "@/components/PageHero";
 import { QuoteForm } from "@/components/QuoteForm";
 import { SEO } from "@/components/SEO";
-import { navAreas, services, site } from "@/data/site";
+import { navAreas, services, site, areaDetails } from "@/data/site";
 import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
 
 const AreaPage = () => {
@@ -13,8 +13,11 @@ const AreaPage = () => {
 
   if (!area) return <Navigate to="/404" replace />;
 
+  const detail = areaDetails[area.slug];
   const title = `Professional Painters in ${area.name}, FL | Elite Painting Solutions`;
-  const description = `Top-rated ${area.name} painters for interior, exterior, cabinet & commercial painting. Licensed, insured, 30+ years experience. Free same-day estimates — call ${site.phone}.`;
+  const description = detail
+    ? `${detail.blurb.slice(0, 150)}… Free same-day estimates from licensed Vero Beach painters — call ${site.phone}.`
+    : `Top-rated ${area.name} painters for interior, exterior, cabinet & commercial painting. Licensed, insured, 30+ years experience. Free same-day estimates — call ${site.phone}.`;
 
   return (
     <PageLayout>
@@ -79,11 +82,59 @@ const AreaPage = () => {
             </div>
 
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              We've been painting homes and businesses in {area.name} for years. Our crews know
-              the local architectural styles, the Florida coastal climate (high humidity, salt
-              air, intense UV), and what it takes to deliver a finish that holds up beautifully
-              season after season.
+              {detail?.blurb ??
+                `We've been painting homes and businesses in ${area.name} for years. Our crews know the local architectural styles, the Florida coastal climate (high humidity, salt air, intense UV), and what it takes to deliver a finish that holds up beautifully season after season.`}
             </p>
+
+            {detail && (
+              <div className="mt-8 grid gap-6 sm:grid-cols-2">
+                <div className="rounded-lg border border-border bg-card p-5">
+                  <h3 className="font-display text-sm font-black uppercase tracking-wide text-secondary">
+                    {area.name} Neighborhoods We Paint
+                  </h3>
+                  <ul className="mt-3 grid grid-cols-1 gap-1.5 text-sm text-muted-foreground">
+                    {detail.neighborhoods.map((n) => (
+                      <li key={n} className="flex items-center gap-2">
+                        <MapPin className="h-3.5 w-3.5 shrink-0 text-primary" />
+                        {n}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="rounded-lg border border-border bg-card p-5">
+                  <h3 className="font-display text-sm font-black uppercase tracking-wide text-secondary">
+                    ZIP Codes Served
+                  </h3>
+                  <p className="mt-3 text-sm text-muted-foreground">
+                    {detail.zips.join(" · ")}
+                  </p>
+                  <h3 className="mt-5 font-display text-sm font-black uppercase tracking-wide text-secondary">
+                    Local Landmarks Nearby
+                  </h3>
+                  <p className="mt-3 text-sm text-muted-foreground">
+                    {detail.landmarks.join(" · ")}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {detail && (
+              <div className="mt-8 flex items-start gap-3 rounded-lg border border-border bg-muted p-5">
+                <Sun className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                <div>
+                  <h3 className="font-display text-sm font-black uppercase tracking-wide text-secondary">
+                    {area.name} Climate Notes
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                    {detail.climateNote}
+                  </p>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    Most-requested service in {area.name}:{" "}
+                    <strong className="text-secondary">{detail.bestSellingService}</strong>.
+                  </p>
+                </div>
+              </div>
+            )}
 
             <ul className="mt-7 space-y-3">
               {[

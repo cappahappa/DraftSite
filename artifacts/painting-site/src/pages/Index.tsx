@@ -13,7 +13,7 @@ import { CTA } from "@/components/sections/CTA";
 import { Footer } from "@/components/sections/Footer";
 import { SEO } from "@/components/SEO";
 import { site, faqs } from "@/data/site";
-import { localBusinessJsonLd, faqJsonLd } from "@/lib/seo";
+import { localBusinessJsonLd, faqJsonLd, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 
 const ChatBubble = lazy(() =>
   import("@/components/ChatBubble").then((m) => ({ default: m.ChatBubble }))
@@ -26,7 +26,12 @@ const Index = () => {
         title="Elite Painting Solutions | Vero Beach FL Painters"
         description="Vero Beach FL painters for interior, exterior, cabinet & commercial work. Licensed, insured, 30+ years. Free same-day estimate — call today."
         canonicalPath="/"
-        jsonLd={[localBusinessJsonLd(), faqJsonLd(faqs)]}
+        jsonLd={[
+          organizationJsonLd(),
+          websiteJsonLd(),
+          localBusinessJsonLd(),
+          faqJsonLd(faqs),
+        ]}
       />
       <Header />
       <main>

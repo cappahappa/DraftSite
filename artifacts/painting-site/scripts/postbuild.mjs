@@ -122,6 +122,122 @@ const areas = [
   "Indian River County",
 ];
 
+// Per-area enrichment — kept in sync with src/data/site.ts areaDetails.
+// Drives the unique, crawler-visible content baked into each /areas/* page.
+const areaDetails = {
+  "vero-beach": {
+    blurb:
+      "Vero Beach is the county seat of Indian River County and the heart of our service area. From historic downtown bungalows to oceanfront homes on the barrier island, we paint every style and era — and we know exactly how Florida sun, salt spray, and afternoon thunderstorms attack each one.",
+    neighborhoods: ["Central Beach","Riomar","Old Riomar","Bermuda Bay","Grand Harbor","The Moorings","Vero Isles","McAnsh Park"],
+    zips: ["32960","32962","32963","32966","32967","32968"],
+    landmarks: ["Riverside Park","Vero Beach Museum of Art","Humiston Beach Park","Royal Palm Pointe"],
+    climateNote: "Oceanfront and lagoon-side homes here take the brunt of salt air and UV. We use 100% acrylic, mildew-resistant exterior coatings rated for coastal Florida exposure.",
+    bestSellingService: "Exterior Painting",
+  },
+  "sebastian": {
+    blurb: "Sebastian is a working waterfront town along the Sebastian River and Indian River Lagoon. Most of our Sebastian work is exterior repaints on stucco and hardie-board single-family homes, plus dock and fence staining for the riverfront and inlet communities.",
+    neighborhoods: ["Sebastian Highlands","Sebastian Lakes","Park Place","Vickers Grove","Roseland Road corridor"],
+    zips: ["32958","32976"],
+    landmarks: ["Sebastian Inlet State Park","Riverview Park","Sebastian Municipal Airport","Pelican Island National Wildlife Refuge"],
+    climateNote: "The river breeze keeps homes cooler but adds humidity to north-facing walls — we treat mildew zones with shellac-based primer before topcoat.",
+    bestSellingService: "Exterior Painting",
+  },
+  "indian-river-shores": {
+    blurb: "Indian River Shores is a quiet barrier-island town between Vero Beach and Wabasso. Homes here range from gulf-style cottages to large oceanfront and riverfront estates, and the salt-air exposure is some of the harshest in the county.",
+    neighborhoods: ["John's Island","The Estuary","Sea Oaks","Bermuda Club","Surf Club"],
+    zips: ["32963"],
+    landmarks: ["John's Island Club","Treasure Shores Park","Indian River Shores Public Safety Building"],
+    climateNote: "Direct ocean exposure means peeling paint within 3–5 years on south- and east-facing walls if the prep skips spot-priming bare wood. We never skip it.",
+    bestSellingService: "Exterior Painting",
+  },
+  "fellsmere": {
+    blurb: "Fellsmere is the inland agricultural town in northwest Indian River County — sugar cane, citrus, and ranch land. We do a lot of farmhouse repaints, barn and outbuilding work, and interior repaints for new construction in the growing residential subdivisions.",
+    neighborhoods: ["Downtown Fellsmere","Fellsmere Estates","Cypress Bend","Broadway corridor"],
+    zips: ["32948"],
+    landmarks: ["Marsh Landing Restaurant","Fellsmere Frog Leg Festival grounds","Stick Marsh / Headwaters Lake"],
+    climateNote: "Inland Fellsmere is hotter and drier than the coast — UV is the main paint killer. We spec UV-stable acrylics and recommend lighter exterior colors for west-facing walls.",
+    bestSellingService: "Interior Painting",
+  },
+  "wabasso": {
+    blurb: "Wabasso is the small unincorporated community at the north end of the barrier island, just north of Indian River Shores. It's mostly residential — single-family homes and a handful of small condo communities — and our crews are out there several times a month.",
+    neighborhoods: ["Wabasso Beach","Old Winter Beach Road","CR 510 corridor"],
+    zips: ["32970"],
+    landmarks: ["Wabasso Beach Park","Disney's Vero Beach Resort","Environmental Learning Center"],
+    climateNote: "Barrier-island salt exposure plus afternoon sea breeze drives mildew on shaded north walls — we soft-wash and treat before painting.",
+    bestSellingService: "Exterior Painting",
+  },
+  "roseland": {
+    blurb: "Roseland is a small riverfront community wedged between Sebastian and the St. Sebastian River Preserve. Lots of mature oaks, screened lanais, and waterfront docks — exterior staining and trim work make up most of what we do here.",
+    neighborhoods: ["Roseland Road","Pine Street","St. Sebastian River corridor"],
+    zips: ["32957"],
+    landmarks: ["St. Sebastian River Preserve State Park","Roseland Community Park"],
+    climateNote: "Heavy tree cover means more shaded, mildew-prone surfaces and pollen buildup. We pressure-wash with mildewcide before any exterior repaint.",
+    bestSellingService: "Exterior Painting",
+  },
+  "winter-beach": {
+    blurb: "Winter Beach is a quiet residential community north of Vero Beach along US-1. We see a steady mix of interior repaints and full exterior jobs, plus cabinet refinishing for kitchens being modernized for resale.",
+    neighborhoods: ["Old Winter Beach","65th Street corridor","US-1 frontage"],
+    zips: ["32966","32967"],
+    landmarks: ["Winter Beach Plaza","Sea Pines Boulevard area"],
+    climateNote: "Inland-coastal mix — humid mornings, hot afternoons. We finish exterior work in the morning to avoid heat-related blistering.",
+    bestSellingService: "Cabinet Refinishing",
+  },
+  "gifford": {
+    blurb: "Gifford is a historic community just north of Vero Beach with strong roots and a tight-knit feel. We take pride in serving Gifford homeowners with the same prep, paint, and warranty we put behind every job in the rest of the county.",
+    neighborhoods: ["45th Street corridor","43rd Avenue area","Gifford Park"],
+    zips: ["32967"],
+    landmarks: ["Gifford Park & Recreation Center","MacWilliam Park"],
+    climateNote: "Mature oak canopies create shaded, damp surfaces that mildew quickly — we always pre-treat before painting.",
+    bestSellingService: "Interior Painting",
+  },
+  "florida-ridge": {
+    blurb: "Florida Ridge is the unincorporated suburban area just south of Vero Beach. Mostly single-family residential with a strong mix of 1970s–1990s ranch homes that benefit hugely from a refresh — exterior repaint plus cabinet refinishing is our most popular Florida Ridge package.",
+    neighborhoods: ["Indian River Estates","Floralton Beach","Vista Plantation","Lakewood Park area"],
+    zips: ["32968"],
+    landmarks: ["South Beach Park","Round Island Riverside Park"],
+    climateNote: "South-facing walls take heavy afternoon sun — we recommend lighter heat-reflective exterior colors here to extend repaint cycles.",
+    bestSellingService: "Cabinet Refinishing",
+  },
+  "vero-lake-estates": {
+    blurb: "Vero Lake Estates is one of the larger inland residential communities in Indian River County — wide streets, deep lots, and a lot of homes with detached garages and outbuildings. We do full-property work here, often combining interior, exterior, and pressure washing in one schedule.",
+    neighborhoods: ["Lake Drive","98th Avenue corridor","85th Street corridor"],
+    zips: ["32967"],
+    landmarks: ["North County Aquatic Center","Indian River County Fairgrounds"],
+    climateNote: "Inland heat plus shoreline humidity from the lakes — we spec mildew-inhibiting exterior paint and seal all wood trim.",
+    bestSellingService: "Exterior Painting",
+  },
+  "orchid": {
+    blurb: "Orchid is a small barrier-island town just south of the Sebastian Inlet, dominated by the Orchid Island Golf & Beach Club community. The salt and wind exposure is severe, and we treat every Orchid project as a high-end coastal repaint with marine-grade prep.",
+    neighborhoods: ["Orchid Island Golf & Beach Club","A1A oceanfront"],
+    zips: ["32963"],
+    landmarks: ["Orchid Island Golf & Beach Club","Treasure Shores Park"],
+    climateNote: "Pure oceanfront — salt fog every night. We spot-prime all bare wood and metal, and use elastomeric coatings on stucco walls facing the Atlantic.",
+    bestSellingService: "Exterior Painting",
+  },
+  "indian-river-county": {
+    blurb: "Indian River County covers about 503 square miles of east-central Florida with Vero Beach as the county seat. We serve the entire county — from the barrier island and the lagoon communities to the inland towns of Fellsmere and the suburban neighborhoods around US-1 and I-95.",
+    neighborhoods: ["Vero Beach","Sebastian","Indian River Shores","Fellsmere","Wabasso","Gifford","Florida Ridge","Vero Lake Estates"],
+    zips: ["32948","32957","32958","32960","32962","32963","32966","32967","32968","32970","32976"],
+    landmarks: ["Sebastian Inlet State Park","Pelican Island National Wildlife Refuge","Riverside Park","Indian River Lagoon"],
+    climateNote: "Indian River County's coastal-to-inland mix means we adapt prep and product per ZIP code — coastal homes get marine-grade systems, inland homes get heat-resistant UV-stable acrylics.",
+    bestSellingService: "Exterior Painting",
+  },
+};
+
+const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+// Real, named Google reviews for the home prerender.
+const realReviews = [
+  { name: "Greg Jammel", text: "Had Elite Painting Solutions come to my home to look at a problem I was having with the paint on the exterior of my home. Michael knew exactly what to do to fix the problem once he saw what was happening. I hired him and his guys to correct what had been done by a previous painter & they came out & performed beyond my expectations! Very reasonably priced & extremely professional. Would recommend them to everyone!" },
+  { name: "Edward G Slimak Jr", text: "Best, local contractor experience. Michael is quick to reply and show up for an estimate. He is knowledgeable and a great communicator detailing the work he will perform. He works hard and efficiently. He did exactly what I requested and more that was needed. When his work is completed you will know why they call him \"Superman\". I highly recommend his work and him personally." },
+  { name: "Monica Rulo", text: "Fantastic service and great results. My house was in pretty rough shape, the T1-11 siding was dry and I have no clue when it was last painted. The team spent an entire day caulking and prepping the house for paint. They took their time to seal and prime the house, and painted with both a sprayer and a roller to ensure full penetration. My house looks new again and I couldn't be happier." },
+  { name: "Robert Austill", text: "I had Michael and his guys with Elite Painting Solutions come by to paint the outside of my home and I was very impressed with how quickly they were able to complete the job and provide the quality that they did. They are definitely the team to call when you want it done right the first time." },
+  { name: "Steve R", text: "Elite Painting Solutions did an amazing job on staining my fence. They were punctual and finished with the job quickly, while maintaining a high level of quality. They gave a very reasonable estimate, better than my other quotes. They were also so kind and upbeat. I'm definitely going to use them again." },
+  { name: "Shawn", text: "So I contacted Elite Painting Solutions and they were very responsive and provided me with an excellent estimate. We agreed to terms and then they went to work transforming my home. Their ability to work together was amazing to watch and I would highly recommend them to anyone looking to have their home painted." },
+  { name: "Joe St_Eggbenedictus", text: "Elite Painting Solutions did an amazing job on the exterior of our home, as well as several jobs on the interior. Michael was fair in his prices, and very honest. There were never any surprises, and he informed us of his intentions every step of the way, especially when there was extra work needed for repairs to rotten wood around the house." },
+  { name: "sameet patel", text: "These guys did a great job, making my house look amazing and did it in a timely fashion. They are very knowledgeable and fixed so many things that the previous guy I hired missed and tried to cut corners with. I only wish I had called Elite first." },
+];
+
 const blogPosts = [
   { slug: "how-to-choose-paint-color", title: "How to Choose the Perfect Paint Color for Your Vero Beach Home", excerpt: "Picking a paint color can feel overwhelming. Here's our step-by-step process to landing on a shade you'll love for years.", date: "2025-03-12" },
   { slug: "interior-vs-exterior-paint", title: "Interior vs. Exterior Paint: What's the Real Difference?", excerpt: "Beyond the obvious, there are big differences in formulation, durability, and price. Here's what every Florida homeowner should know.", date: "2025-02-27" },
@@ -212,6 +328,20 @@ const buildJsonLdForRoute = (route) => {
   const blocks = [];
 
   if (route.path === "/") {
+    // Real Review nodes attached to the LocalBusiness — anchors AggregateRating.
+    blocks.push({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "@id": `${SITE_URL}/#reviews`,
+      itemListElement: realReviews.map((r, i) => ({
+        "@type": "Review",
+        position: i + 1,
+        author: { "@type": "Person", name: r.name },
+        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5", worstRating: "1" },
+        reviewBody: r.text,
+        itemReviewed: { "@id": `${SITE_URL}/#business` },
+      })),
+    });
     blocks.push({
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -262,6 +392,28 @@ const buildJsonLdForRoute = (route) => {
         { "@type": "ListItem", position: 2, name: route.areaName, item: `${SITE_URL}${route.path}` },
       ],
     });
+    const detail = areaDetails[slugify(route.areaName)];
+    if (detail) {
+      blocks.push({
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: `Painting Services in ${route.areaName}, FL`,
+        serviceType: "Painting",
+        description: detail.blurb,
+        provider: { "@id": `${SITE_URL}/#business` },
+        url: `${SITE_URL}${route.path}`,
+        areaServed: {
+          "@type": "City",
+          name: route.areaName,
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: route.areaName,
+            addressRegion: "FL",
+            addressCountry: "US",
+          },
+        },
+      });
+    }
   }
 
   if (route.kind === "blog-post") {
@@ -289,6 +441,21 @@ const buildJsonLdForRoute = (route) => {
   }
 
   return blocks;
+};
+
+// Visible-but-tiny breadcrumb HTML rendered above the SEO snapshot. Plain
+// link text so crawlers see the navigation hierarchy.
+const buildBreadcrumbHtml = (items) => {
+  const parts = items
+    .map((b, i) => {
+      const sep = i === 0 ? "" : ' <span aria-hidden="true">›</span> ';
+      const inner = b.href
+        ? `<a href="${escapeHtml(b.href)}">${escapeHtml(b.label)}</a>`
+        : `<span aria-current="page">${escapeHtml(b.label)}</span>`;
+      return `${sep}${inner}`;
+    })
+    .join("");
+  return `<nav aria-label="Breadcrumb"><p>${parts}</p></nav>`;
 };
 
 // Build hidden, crawlable text content for each route. Sits in the static HTML
@@ -319,9 +486,22 @@ const buildSeoBlock = (route) => {
       <h2>Contact</h2>
       ${businessLine}
       <p>Email: <a href="mailto:eps.paintingsolutions@gmail.com">eps.paintingsolutions@gmail.com</a></p>
+      <h2>What Our Vero Beach Customers Say</h2>
+      ${realReviews
+        .map(
+          (r) =>
+            `<blockquote><p>"${escapeHtml(r.text)}"</p><footer>— ${escapeHtml(r.name)}, 5 stars on Google</footer></blockquote>`,
+        )
+        .join("\n      ")}
     `;
   } else if (route.kind === "service") {
+    const breadcrumb = buildBreadcrumbHtml([
+      { label: "Home", href: "/" },
+      { label: "Services", href: "/#services" },
+      { label: route.title },
+    ]);
     inner = `
+      ${breadcrumb}
       <h1>${escapeHtml(route.title)} in Vero Beach, FL</h1>
       <p>${escapeHtml(route.description)}</p>
       ${(route.body || []).map((p) => `<p>${escapeHtml(p)}</p>`).join("\n      ")}
@@ -331,16 +511,51 @@ const buildSeoBlock = (route) => {
       ${businessLine}
     `;
   } else if (route.kind === "area") {
-    inner = `
-      <h1>Painters in ${escapeHtml(route.areaName)}, FL</h1>
-      <p>Elite Painting Solutions provides expert interior, exterior, cabinet, and commercial painting in ${escapeHtml(route.areaName)}, Florida and the surrounding Indian River County area.</p>
-      <h2>Local Painting Services</h2>
-      <ul>
-        ${services.map((s) => `<li><strong>${escapeHtml(s.title)}</strong> — ${escapeHtml(s.description)}</li>`).join("\n        ")}
-      </ul>
-      <p>Call ${escapeHtml(SITE_PHONE)} for a free same-day estimate in ${escapeHtml(route.areaName)}.</p>
-      ${businessLine}
-    `;
+    const detail = areaDetails[slugify(route.areaName)];
+    const breadcrumb = buildBreadcrumbHtml([
+      { label: "Home", href: "/" },
+      { label: "Service Areas", href: "/#areas" },
+      { label: route.areaName },
+    ]);
+    if (detail) {
+      inner = `
+        ${breadcrumb}
+        <h1>Painters in ${escapeHtml(route.areaName)}, FL — Elite Painting Solutions</h1>
+        <p>${escapeHtml(detail.blurb)}</p>
+        <h2>${escapeHtml(route.areaName)} Neighborhoods We Paint</h2>
+        <ul>
+          ${detail.neighborhoods.map((n) => `<li>${escapeHtml(n)}</li>`).join("\n          ")}
+        </ul>
+        <h2>ZIP Codes Served in ${escapeHtml(route.areaName)}</h2>
+        <p>${detail.zips.map((z) => escapeHtml(z)).join(", ")}</p>
+        <h2>Local Landmarks Near Our ${escapeHtml(route.areaName)} Jobs</h2>
+        <ul>
+          ${detail.landmarks.map((l) => `<li>${escapeHtml(l)}</li>`).join("\n          ")}
+        </ul>
+        <h2>${escapeHtml(route.areaName)} Climate &amp; Paint Notes</h2>
+        <p>${escapeHtml(detail.climateNote)}</p>
+        <p>Most-requested service in ${escapeHtml(route.areaName)}: <strong>${escapeHtml(detail.bestSellingService)}</strong>.</p>
+        <h2>Painting Services Available in ${escapeHtml(route.areaName)}</h2>
+        <ul>
+          ${services.map((s) => `<li><a href="${escapeHtml(`/services/${s.slug}`)}"><strong>${escapeHtml(s.title)}</strong></a> — ${escapeHtml(s.description)}</li>`).join("\n          ")}
+        </ul>
+        <h2>Free Estimate in ${escapeHtml(route.areaName)}</h2>
+        <p>Call <a href="${SITE_PHONE_HREF}">${escapeHtml(SITE_PHONE)}</a> for a free same-day painting estimate anywhere in ${escapeHtml(route.areaName)} or surrounding Indian River County.</p>
+        ${businessLine}
+      `;
+    } else {
+      inner = `
+        ${breadcrumb}
+        <h1>Painters in ${escapeHtml(route.areaName)}, FL</h1>
+        <p>Elite Painting Solutions provides expert interior, exterior, cabinet, and commercial painting in ${escapeHtml(route.areaName)}, Florida and the surrounding Indian River County area.</p>
+        <h2>Local Painting Services</h2>
+        <ul>
+          ${services.map((s) => `<li><strong>${escapeHtml(s.title)}</strong> — ${escapeHtml(s.description)}</li>`).join("\n        ")}
+        </ul>
+        <p>Call ${escapeHtml(SITE_PHONE)} for a free same-day estimate in ${escapeHtml(route.areaName)}.</p>
+        ${businessLine}
+      `;
+    }
   } else if (route.kind === "blog-post") {
     inner = `
       <article>

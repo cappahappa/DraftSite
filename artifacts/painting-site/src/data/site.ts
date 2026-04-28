@@ -40,6 +40,235 @@ export const navAreas: Area[] = [
   { name: "Indian River County", slug: "indian-river-county" },
 ];
 
+// Per-area enrichment used by AreaPage.tsx (visible content) and the
+// prerender script (crawler-readable content). Adding genuine local detail —
+// neighborhoods, ZIP codes, landmarks, climate notes — is what separates a
+// real local-SEO page from a templated doorway page.
+export type AreaDetail = {
+  blurb: string;
+  neighborhoods: string[];
+  zips: string[];
+  landmarks: string[];
+  climateNote: string;
+  bestSellingService: string;
+};
+
+export const areaDetails: Record<string, AreaDetail> = {
+  "vero-beach": {
+    blurb:
+      "Vero Beach is the county seat of Indian River County and the heart of our service area. From historic downtown bungalows to oceanfront homes on the barrier island, we paint every style and era — and we know exactly how Florida sun, salt spray, and afternoon thunderstorms attack each one.",
+    neighborhoods: [
+      "Central Beach",
+      "Riomar",
+      "Old Riomar",
+      "Bermuda Bay",
+      "Grand Harbor",
+      "The Moorings",
+      "Vero Isles",
+      "McAnsh Park",
+    ],
+    zips: ["32960", "32962", "32963", "32966", "32967", "32968"],
+    landmarks: [
+      "Riverside Park",
+      "Vero Beach Museum of Art",
+      "Humiston Beach Park",
+      "Royal Palm Pointe",
+    ],
+    climateNote:
+      "Oceanfront and lagoon-side homes here take the brunt of salt air and UV. We use 100% acrylic, mildew-resistant exterior coatings rated for coastal Florida exposure.",
+    bestSellingService: "Exterior Painting",
+  },
+  sebastian: {
+    blurb:
+      "Sebastian is a working waterfront town along the Sebastian River and Indian River Lagoon. Most of our Sebastian work is exterior repaints on stucco and hardie-board single-family homes, plus dock and fence staining for the riverfront and inlet communities.",
+    neighborhoods: [
+      "Sebastian Highlands",
+      "Sebastian Lakes",
+      "Park Place",
+      "Vickers Grove",
+      "Roseland Road corridor",
+    ],
+    zips: ["32958", "32976"],
+    landmarks: [
+      "Sebastian Inlet State Park",
+      "Riverview Park",
+      "Sebastian Municipal Airport",
+      "Pelican Island National Wildlife Refuge",
+    ],
+    climateNote:
+      "The river breeze keeps homes cooler but adds humidity to north-facing walls — we treat mildew zones with shellac-based primer before topcoat.",
+    bestSellingService: "Exterior Painting",
+  },
+  "indian-river-shores": {
+    blurb:
+      "Indian River Shores is a quiet barrier-island town between Vero Beach and Wabasso. Homes here range from gulf-style cottages to large oceanfront and riverfront estates, and the salt-air exposure is some of the harshest in the county.",
+    neighborhoods: [
+      "John's Island",
+      "The Estuary",
+      "Sea Oaks",
+      "Bermuda Club",
+      "Surf Club",
+    ],
+    zips: ["32963"],
+    landmarks: [
+      "John's Island Club",
+      "Treasure Shores Park",
+      "Indian River Shores Public Safety Building",
+    ],
+    climateNote:
+      "Direct ocean exposure means peeling paint within 3–5 years on south- and east-facing walls if the prep skips spot-priming bare wood. We never skip it.",
+    bestSellingService: "Exterior Painting",
+  },
+  fellsmere: {
+    blurb:
+      "Fellsmere is the inland agricultural town in northwest Indian River County — sugar cane, citrus, and ranch land. We do a lot of farmhouse repaints, barn and outbuilding work, and interior repaints for new construction in the growing residential subdivisions.",
+    neighborhoods: [
+      "Downtown Fellsmere",
+      "Fellsmere Estates",
+      "Cypress Bend",
+      "Broadway corridor",
+    ],
+    zips: ["32948"],
+    landmarks: [
+      "Marsh Landing Restaurant",
+      "Fellsmere Frog Leg Festival grounds",
+      "Stick Marsh / Headwaters Lake",
+    ],
+    climateNote:
+      "Inland Fellsmere is hotter and drier than the coast — UV is the main paint killer. We spec UV-stable acrylics and recommend lighter exterior colors for west-facing walls.",
+    bestSellingService: "Interior Painting",
+  },
+  wabasso: {
+    blurb:
+      "Wabasso is the small unincorporated community at the north end of the barrier island, just north of Indian River Shores. It's mostly residential — single-family homes and a handful of small condo communities — and our crews are out there several times a month.",
+    neighborhoods: [
+      "Wabasso Beach",
+      "Old Winter Beach Road",
+      "CR 510 corridor",
+    ],
+    zips: ["32970"],
+    landmarks: [
+      "Wabasso Beach Park",
+      "Disney's Vero Beach Resort",
+      "Environmental Learning Center",
+    ],
+    climateNote:
+      "Barrier-island salt exposure plus afternoon sea breeze drives mildew on shaded north walls — we soft-wash and treat before painting.",
+    bestSellingService: "Exterior Painting",
+  },
+  roseland: {
+    blurb:
+      "Roseland is a small riverfront community wedged between Sebastian and the St. Sebastian River Preserve. Lots of mature oaks, screened lanais, and waterfront docks — exterior staining and trim work make up most of what we do here.",
+    neighborhoods: [
+      "Roseland Road",
+      "Pine Street",
+      "St. Sebastian River corridor",
+    ],
+    zips: ["32957"],
+    landmarks: [
+      "St. Sebastian River Preserve State Park",
+      "Roseland Community Park",
+    ],
+    climateNote:
+      "Heavy tree cover means more shaded, mildew-prone surfaces and pollen buildup. We pressure-wash with mildewcide before any exterior repaint.",
+    bestSellingService: "Exterior Painting",
+  },
+  "winter-beach": {
+    blurb:
+      "Winter Beach is a quiet residential community north of Vero Beach along US-1. We see a steady mix of interior repaints and full exterior jobs, plus cabinet refinishing for kitchens being modernized for resale.",
+    neighborhoods: [
+      "Old Winter Beach",
+      "65th Street corridor",
+      "US-1 frontage",
+    ],
+    zips: ["32966", "32967"],
+    landmarks: ["Winter Beach Plaza", "Sea Pines Boulevard area"],
+    climateNote:
+      "Inland-coastal mix — humid mornings, hot afternoons. We finish exterior work in the morning to avoid heat-related blistering.",
+    bestSellingService: "Cabinet Refinishing",
+  },
+  gifford: {
+    blurb:
+      "Gifford is a historic community just north of Vero Beach with strong roots and a tight-knit feel. We take pride in serving Gifford homeowners with the same prep, paint, and warranty we put behind every job in the rest of the county.",
+    neighborhoods: [
+      "45th Street corridor",
+      "43rd Avenue area",
+      "Gifford Park",
+    ],
+    zips: ["32967"],
+    landmarks: [
+      "Gifford Park & Recreation Center",
+      "MacWilliam Park",
+    ],
+    climateNote:
+      "Mature oak canopies create shaded, damp surfaces that mildew quickly — we always pre-treat before painting.",
+    bestSellingService: "Interior Painting",
+  },
+  "florida-ridge": {
+    blurb:
+      "Florida Ridge is the unincorporated suburban area just south of Vero Beach. Mostly single-family residential with a strong mix of 1970s–1990s ranch homes that benefit hugely from a refresh — exterior repaint plus cabinet refinishing is our most popular Florida Ridge package.",
+    neighborhoods: [
+      "Indian River Estates",
+      "Floralton Beach",
+      "Vista Plantation",
+      "Lakewood Park area",
+    ],
+    zips: ["32968"],
+    landmarks: ["South Beach Park", "Round Island Riverside Park"],
+    climateNote:
+      "South-facing walls take heavy afternoon sun — we recommend lighter heat-reflective exterior colors here to extend repaint cycles.",
+    bestSellingService: "Cabinet Refinishing",
+  },
+  "vero-lake-estates": {
+    blurb:
+      "Vero Lake Estates is one of the larger inland residential communities in Indian River County — wide streets, deep lots, and a lot of homes with detached garages and outbuildings. We do full-property work here, often combining interior, exterior, and pressure washing in one schedule.",
+    neighborhoods: [
+      "Lake Drive",
+      "98th Avenue corridor",
+      "85th Street corridor",
+    ],
+    zips: ["32967"],
+    landmarks: ["North County Aquatic Center", "Indian River County Fairgrounds"],
+    climateNote:
+      "Inland heat plus shoreline humidity from the lakes — we spec mildew-inhibiting exterior paint and seal all wood trim.",
+    bestSellingService: "Exterior Painting",
+  },
+  orchid: {
+    blurb:
+      "Orchid is a small barrier-island town just south of the Sebastian Inlet, dominated by the Orchid Island Golf & Beach Club community. The salt and wind exposure is severe, and we treat every Orchid project as a high-end coastal repaint with marine-grade prep.",
+    neighborhoods: ["Orchid Island Golf & Beach Club", "A1A oceanfront"],
+    zips: ["32963"],
+    landmarks: ["Orchid Island Golf & Beach Club", "Treasure Shores Park"],
+    climateNote:
+      "Pure oceanfront — salt fog every night. We spot-prime all bare wood and metal, and use elastomeric coatings on stucco walls facing the Atlantic.",
+    bestSellingService: "Exterior Painting",
+  },
+  "indian-river-county": {
+    blurb:
+      "Indian River County covers about 503 square miles of east-central Florida with Vero Beach as the county seat. We serve the entire county — from the barrier island and the lagoon communities to the inland towns of Fellsmere and the suburban neighborhoods around US-1 and I-95.",
+    neighborhoods: [
+      "Vero Beach",
+      "Sebastian",
+      "Indian River Shores",
+      "Fellsmere",
+      "Wabasso",
+      "Gifford",
+      "Florida Ridge",
+      "Vero Lake Estates",
+    ],
+    zips: ["32948", "32957", "32958", "32960", "32962", "32963", "32966", "32967", "32968", "32970", "32976"],
+    landmarks: [
+      "Sebastian Inlet State Park",
+      "Pelican Island National Wildlife Refuge",
+      "Riverside Park",
+      "Indian River Lagoon",
+    ],
+    climateNote:
+      "Indian River County's coastal-to-inland mix means we adapt prep and product per ZIP code — coastal homes get marine-grade systems, inland homes get heat-resistant UV-stable acrylics.",
+    bestSellingService: "Exterior Painting",
+  },
+};
+
 export const services = [
   {
     title: "Interior Painting",

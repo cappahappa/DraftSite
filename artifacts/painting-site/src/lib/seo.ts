@@ -1,4 +1,4 @@
-import { site, services, navAreas } from "@/data/site";
+import { site, services, navAreas, reviews } from "@/data/site";
 
 const ENV_SITE_URL =
   (typeof import.meta !== "undefined" &&
@@ -45,6 +45,24 @@ export const websiteJsonLd = () => ({
   inLanguage: "en-US",
 });
 
+// Real, verifiable review nodes built from the named Google reviews in
+// data/site.ts. Schema.org/Google requires that every Review has an author
+// and reviewBody, and that AggregateRating only appears alongside actual
+// reviews — see https://developers.google.com/search/docs/appearance/structured-data/review-snippet
+export const reviewSchemaItems = () =>
+  reviews.map((r) => ({
+    "@type": "Review",
+    author: { "@type": "Person", name: r.name },
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: String(r.rating),
+      bestRating: "5",
+      worstRating: "1",
+    },
+    reviewBody: r.text,
+    itemReviewed: { "@id": BUSINESS_ID },
+  }));
+
 export const localBusinessJsonLd = () => ({
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "Painter", "HomeAndConstructionBusiness"],
@@ -59,6 +77,9 @@ export const localBusinessJsonLd = () => ({
   address: {
     "@type": "PostalAddress",
     addressCountry: "US",
+    addressRegion: "FL",
+    addressLocality: "Vero Beach",
+    postalCode: "32960",
   },
   areaServed: navAreas.map((a) => `${a.name}, FL`),
   description: site.description,
@@ -75,10 +96,13 @@ export const localBusinessJsonLd = () => ({
       },
     })),
   },
+  // Real Review nodes (named author + full text) anchor the AggregateRating.
+  // Without these, Google may flag the AggregateRating as unsupported.
+  review: reviewSchemaItems(),
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "5",
-    reviewCount: "47",
+    reviewCount: String(reviews.length),
     bestRating: "5",
     worstRating: "1",
   },
