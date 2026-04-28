@@ -194,108 +194,39 @@
   }
 }
 
-/* ===== Conversion microanimations ===== */
+/* ===== Micro-interactions removed for performance =====
+   The classes below are kept as no-ops so existing component markup
+   keeps working without code changes. Only the form-input focus glow
+   is preserved because it's an accessibility cue, not a flourish. */
 
-/* Scroll-reveal: elements with [data-reveal] start hidden and fade up when in view */
-[data-reveal] {
-  opacity: 0;
-  transform: translate3d(0, 18px, 0);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
+[data-reveal],
 [data-reveal].is-visible {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-@media (prefers-reduced-motion: reduce) {
-  [data-reveal] {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
+  transform: none;
+  transition: none;
 }
 
-/* Pulsing glow on primary CTAs — gently calls attention without being annoying */
-@keyframes cta-pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 0 0 hsl(var(--primary) / 0.55),
-      0 10px 25px -5px hsl(var(--primary) / 0.35);
-  }
-  50% {
-    box-shadow: 0 0 0 14px hsl(var(--primary) / 0),
-      0 14px 30px -6px hsl(var(--primary) / 0.45);
-  }
-}
-.cta-pulse {
-  animation: cta-pulse-glow 2.6s ease-in-out infinite;
-}
-.cta-pulse-dark {
-  animation: cta-pulse-glow-dark 2.6s ease-in-out infinite;
-}
-@keyframes cta-pulse-glow-dark {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.4),
-      0 10px 25px -5px rgba(0, 0, 0, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 0 14px rgba(0, 0, 0, 0),
-      0 14px 30px -6px rgba(0, 0, 0, 0.5);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .cta-pulse,
-  .cta-pulse-dark { animation: none; }
-}
-
-/* Tactile button press feedback */
-.btn-press {
-  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.25s ease, background-color 0.25s ease, color 0.25s ease,
-    border-color 0.25s ease, filter 0.25s ease;
-}
-.btn-press:hover { transform: translateY(-2px) scale(1.03); }
-.btn-press:active { transform: translateY(0) scale(0.97); }
-
-/* Phone-icon ring pulse — subtle "call us" cue */
-@keyframes phone-ring {
-  0%, 70%, 100% { transform: rotate(0); }
-  10%, 30%, 50% { transform: rotate(-12deg); }
-  20%, 40%, 60% { transform: rotate(12deg); }
-}
-.phone-ring {
-  display: inline-flex;
-  transform-origin: 50% 4px;
-  animation: phone-ring 4.5s ease-in-out infinite;
-}
-@media (prefers-reduced-motion: reduce) {
-  .phone-ring { animation: none; }
-}
-
-/* Star shimmer on review/star groups */
-@keyframes star-shimmer {
-  0% { filter: drop-shadow(0 0 0 transparent); }
-  50% { filter: drop-shadow(0 0 6px #F5C518); }
-  100% { filter: drop-shadow(0 0 0 transparent); }
-}
+.cta-pulse,
+.cta-pulse-dark,
+.phone-ring,
+.badge-float,
+.stars-shimmer,
 .stars-shimmer:hover svg,
-.stars-shimmer:focus-visible svg {
-  animation: star-shimmer 1.2s ease-in-out;
+.stars-shimmer:focus-visible svg,
+.btn-press,
+.btn-press:hover,
+.btn-press:active,
+.lift-hover,
+.lift-hover:hover {
+  animation: none !important;
+  transform: none;
+  transition: none;
+  box-shadow: none;
 }
 
-/* Soft float for trust badges / pills */
-@keyframes badge-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-}
-.badge-float {
-  animation: badge-float 4s ease-in-out infinite;
-}
-@media (prefers-reduced-motion: reduce) {
-  .badge-float { animation: none; }
-}
+.link-grow::after { content: none; }
 
-/* Input focus glow for the quote form */
+/* Input focus glow for the quote form — kept for accessibility */
 .input-glow:focus,
 .input-glow:focus-visible {
   outline: none;
@@ -303,35 +234,4 @@
     0 1px 2px rgba(0, 0, 0, 0.04);
   border-color: hsl(var(--primary)) !important;
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-/* Card lift utility */
-.lift-hover {
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.35s ease, border-color 0.35s ease;
-}
-.lift-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.25);
-}
-
-/* Underline grow link */
-.link-grow {
-  position: relative;
-}
-.link-grow::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -2px;
-  height: 2px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.link-grow:hover::after,
-.link-grow:focus-visible::after {
-  transform: scaleX(1);
 }
