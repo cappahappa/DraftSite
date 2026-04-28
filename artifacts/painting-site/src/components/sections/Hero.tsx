@@ -44,15 +44,18 @@ export const Hero = () => {
             <a
               href="#quote"
               aria-label="Scroll to the quick quote form on this page"
-              className="inline-flex items-center justify-center rounded-md bg-primary px-7 py-3.5 font-display font-black tracking-wide text-primary-foreground shadow-glow transition-smooth hover:scale-105"
+              className="btn-press cta-pulse inline-flex items-center justify-center rounded-md bg-primary px-7 py-3.5 font-display font-black tracking-wide text-primary-foreground shadow-glow"
             >
               GET A FREE QUOTE
             </a>
             <a
               href={site.phoneHref}
               aria-label={`Call Elite Painting Solutions at ${site.phone}`}
-              className="inline-flex items-center justify-center rounded-md border-2 border-white px-7 py-3.5 font-display font-black tracking-wide text-white transition-smooth hover:bg-white hover:text-secondary"
+              className="btn-press inline-flex items-center justify-center gap-2 rounded-md border-2 border-white px-7 py-3.5 font-display font-black tracking-wide text-white hover:bg-white hover:text-secondary"
             >
+              <svg viewBox="0 0 24 24" className="phone-ring h-4 w-4 fill-current" aria-hidden="true">
+                <path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1 1 0 0 0-1.02.24l-2.2 2.2a15.05 15.05 0 0 1-6.59-6.59l2.2-2.2a1 1 0 0 0 .25-1.02A11.36 11.36 0 0 1 8.5 4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1c0 9.39 7.61 17 17 17a1 1 0 0 0 1-1v-3.5a1 1 0 0 0-1-1z" />
+              </svg>
               Call {site.phone}
             </a>
           </div>

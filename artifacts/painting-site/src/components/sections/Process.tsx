@@ -17,11 +17,11 @@ export const Process = () => {
       />
       <div className="container-tight relative">
         <div className="mx-auto max-w-2xl text-center">
-          <span className="text-overline text-primary">Our Process</span>
-          <h2 className="heading-display mt-3 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+          <span className="text-overline text-primary" data-reveal>Our Process</span>
+          <h2 className="heading-display mt-3 text-3xl sm:text-4xl md:text-5xl lg:text-6xl" data-reveal style={{ transitionDelay: "80ms" }}>
             SIMPLE. CLEAR. FAST.
           </h2>
-          <p className="mt-4 text-white/75">
+          <p className="mt-4 text-white/75" data-reveal style={{ transitionDelay: "160ms" }}>
             Our process is simple and only takes a few easy steps.
           </p>
         </div>
@@ -31,9 +31,10 @@ export const Process = () => {
             <div
               key={step.n}
               className="group relative rounded-2xl border border-white/10 bg-white/[0.04] p-7 backdrop-blur-sm transition-smooth hover:-translate-y-1 hover:border-primary/40 hover:bg-white/[0.08]"
-              style={{ animationDelay: `${i * 100}ms` }}
+              data-reveal
+              style={{ transitionDelay: `${i * 90}ms` }}
             >
-              <div className="mb-4 font-display text-6xl font-black text-primary/40 transition-smooth group-hover:text-primary">
+              <div className="mb-4 font-display text-6xl font-black text-primary/40 transition-all duration-500 group-hover:text-primary group-hover:scale-110">
                 {step.n}
               </div>
               <h3 className="heading-display text-2xl">{step.title}</h3>

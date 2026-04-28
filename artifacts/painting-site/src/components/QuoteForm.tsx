@@ -123,7 +123,7 @@ export const QuoteForm = ({ heading = "GET A FREE QUOTE" }: { heading?: string }
             value={name}
             onChange={(e) => setName(e.target.value)}
             disabled={submitting}
-            className="w-full rounded-md border-0 bg-background px-4 py-3 text-foreground shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-yellow-400 disabled:opacity-60"
+            className="input-glow w-full rounded-md border-0 bg-background px-4 py-3 text-foreground shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-yellow-400 disabled:opacity-60"
           />
         </div>
         <div>
@@ -140,7 +140,7 @@ export const QuoteForm = ({ heading = "GET A FREE QUOTE" }: { heading?: string }
             value={phone}
             onChange={handlePhoneChange}
             disabled={submitting}
-            className="w-full rounded-md border-0 bg-background px-4 py-3 text-foreground shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-yellow-400 disabled:opacity-60"
+            className="input-glow w-full rounded-md border-0 bg-background px-4 py-3 text-foreground shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-yellow-400 disabled:opacity-60"
           />
         </div>
         <div>
@@ -154,7 +154,7 @@ export const QuoteForm = ({ heading = "GET A FREE QUOTE" }: { heading?: string }
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             disabled={submitting}
-            className="w-full resize-none rounded-md border-0 bg-background px-4 py-3 text-foreground shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-yellow-400 disabled:opacity-60"
+            className="input-glow w-full resize-none rounded-md border-0 bg-background px-4 py-3 text-foreground shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-yellow-400 disabled:opacity-60"
           />
         </div>
 
