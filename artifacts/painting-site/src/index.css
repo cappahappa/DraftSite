@@ -160,22 +160,32 @@
   align-items: center;
   width: max-content !important;
   animation: eps-marquee 25s linear infinite !important;
+  animation-play-state: running !important;
   will-change: transform;
   backface-visibility: hidden;
-}
-.eps-marquee-viewport:hover .eps-marquee-track,
-.eps-marquee-viewport:focus-within .eps-marquee-track {
-  animation-play-state: paused !important;
+  transform: translate3d(0, 0, 0);
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Reviews slider — same loop pattern, slower for readability */
 .eps-reviews-track {
   width: max-content !important;
   animation: eps-marquee 60s linear infinite !important;
+  animation-play-state: running !important;
   will-change: transform;
   backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  -webkit-font-smoothing: antialiased;
 }
-.eps-marquee-viewport:hover .eps-reviews-track,
-.eps-marquee-viewport:focus-within .eps-reviews-track {
-  animation-play-state: paused !important;
+
+/* Always keep marquees running — never pause on hover, focus, or reduced motion */
+.eps-marquee-track,
+.eps-reviews-track {
+  animation-play-state: running !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .eps-marquee-track,
+  .eps-reviews-track {
+    animation-play-state: running !important;
+  }
 }
